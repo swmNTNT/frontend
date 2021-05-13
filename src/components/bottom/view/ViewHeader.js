@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import InfoIcon from "@material-ui/icons/Info";
-import GpsFixedIcon from "@material-ui/icons/GpsFixed";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-const ViewHeader = ({ ...props }) => {
+
+import { IconButton } from "@material-ui/core";
+import {
+  MyLocationRounded,
+  ExitToAppRounded,
+  InfoRounded,
+} from "@material-ui/icons";
+
+const ViewHeader = (props) => {
+  const { onLoginClicked, onMyLocationClicked, onInfoClicked } = { ...props };
+
   return (
     <Wrapper {...props}>
       <div className="logo">
@@ -14,27 +21,15 @@ const ViewHeader = ({ ...props }) => {
         ></img>
       </div>
       <div className="info">
-        <GpsFixedIcon
-          onClick={() => {
-            console.log("clicked");
-          }}
-          className="icons"
-          htmlColor="#5F534A"
-        />
-        <ExitToAppIcon
-          onClick={() => {
-            console.log("clicked");
-          }}
-          className="icons"
-          htmlColor="#5F534A"
-        />
-        <InfoIcon
-          onClick={() => {
-            console.log("clicked");
-          }}
-          className="icons"
-          htmlColor="#5F534A"
-        />
+        <IconButton onClick={onLoginClicked}>
+          <ExitToAppRounded htmlColor="#5F534A" />
+        </IconButton>
+        <IconButton onClick={onMyLocationClicked}>
+          <MyLocationRounded htmlColor="#5F534A" />
+        </IconButton>
+        <IconButton onClick={onInfoClicked}>
+          <InfoRounded htmlColor="#5F534A" />
+        </IconButton>
       </div>
     </Wrapper>
   );
