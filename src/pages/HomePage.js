@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BottomModule from "../components/bottom/BottomModule";
 import SearchBar from "../components/SearchBar";
 import NaverMapC from "../components/NaverMapC";
@@ -20,10 +20,25 @@ import {
 import SearchIcon from "@material-ui/icons/SearchRounded";
 import NaverMapAPI from "../components/NaverMapAPI";
 
+import { postApi } from "../api/evApi";
 const navermaps = window.naver.maps;
 
 function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await postApi.stationNearby({
+        minLat: "37.5875896",
+        maxLat: "37.6875296",
+        minLng: "127.0674823",
+        maxLng: "127.0771823",
+      });
+      console.log(res);
+    };
+    fetchData();
+    return () => {};
+  }, []);
 
   const toggleDrawer = (open) => (event) => {
     if (
