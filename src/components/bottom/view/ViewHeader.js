@@ -23,15 +23,15 @@ const ViewHeader = (props) => {
         ></img>
       </div>
       <div className="info">
-        <IconButton onClick={onLoginClicked}>
+        {/* <IconButton onClick={onLoginClicked}>
           <ExitToAppRounded htmlColor="#5F534A" />
-        </IconButton>
+        </IconButton> */}
         <IconButton onClick={onMyLocationClicked}>
           <MyLocationRounded htmlColor="#5F534A" />
         </IconButton>
-        <IconButton onClick={onInfoClicked}>
+        {/* <IconButton onClick={onInfoClicked}>
           <InfoRounded htmlColor="#5F534A" />
-        </IconButton>
+        </IconButton> */}
       </div>
     </Wrapper>
   );

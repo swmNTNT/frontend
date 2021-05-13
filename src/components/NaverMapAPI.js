@@ -104,8 +104,8 @@ function NaverMapAPI(props) {
         position={new navermaps.LatLng(marker.lat, marker.lng)}
         icon={
           isClicked
-            ? "http://localhost:3000/marker_clicked.jpg"
-            : "http://localhost:3000/marker_normal.png"
+            ? "/icons/ic_available_clicked.png"
+            : "/icons/ic_unavailable.png"
         }
         onClick={() => {
           mapRef.morph(
