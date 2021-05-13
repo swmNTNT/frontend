@@ -14,11 +14,17 @@ import ViewNotification from "../components/bottom/view/ViewNotification";
 
 function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState();
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: null,
+    lng: null,
+  });
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(true);
   console.log("currentLocation update", currentLocation);
   //
-  const stationsState = useStationNearby(); // stationsState.stations
+  const stationsState = useStationNearby(
+    currentLocation.lat,
+    currentLocation.lng
+  ); // stationsState.stations
   // console.log(stationsState);
 
   const [viewState] = useState({
