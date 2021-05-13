@@ -19,6 +19,8 @@ import {
 import SearchIcon from "@material-ui/icons/SearchRounded";
 import NaverMapAPI from "../components/NaverMapAPI";
 import useStationNearby from "../hooks/useStationNearby";
+import { ViewState, ViewTitle } from "../components/bottom/view";
+import ViewNotification from "../components/bottom/view/ViewNotification";
 
 const navermaps = window.naver.maps;
 
@@ -31,6 +33,22 @@ function HomePage() {
   const stationsState = useStationNearby(); // stationsState.stations
   // console.log(stationsState);
 
+  const [viewState] = useState({
+    header: {},
+    title: {
+      title_text: "알림 목록",
+    },
+    list: [
+      {
+        subTitle: "DC콤보 . DC차데모 . AC3상",
+        title: "SW마에스트로센터...",
+      },
+      {
+        subTitle: "DC콤보 . DC차데모 . AC3상",
+        title: "어디어디 공간",
+      },
+    ],
+  });
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -50,26 +68,13 @@ function HomePage() {
         zIndex: 4000,
       }}
     >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <SearchIcon /> : <SearchIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <SearchIcon /> : <SearchIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <ViewTitle
+        title_text={viewState.title.title_text}
+        style={{
+          marginTop: 24,
+        }}
+      />
+      <ViewNotification notificationItem={viewState.list} />
     </div>
   );
 
@@ -102,7 +107,8 @@ function HomePage() {
         loading={<p>Maps Loading...</p>}
       >
         <NaverMapAPI
-          isBottomSheetOpened
+          isBottomSheetOpened={isBottomSheetOpened}
+          currentLocation={currentLocation}
           onMarkerClicked={(id) => {}}
           onMapMoved={(bound) => {}}
         />
@@ -112,10 +118,13 @@ function HomePage() {
 
       <BottomModule
         stationsState={stationsState}
-        onOpened={() => console.log("opened")}
-        onClosed={() => console.log("closed")}
-        // onOpened={() => setIsBottomSheetOpened(true)}
-        // onClosed={() => setIsBottomSheetOpened(false)}
+        onMyLocationClicked={getMyLocation}
+        onOpened={() => {
+          setIsBottomSheetOpened(true);
+        }}
+        onClosed={() => {
+          setIsBottomSheetOpened(false);
+        }}
       />
       <Drawer
         anchor="right"

@@ -6,6 +6,7 @@ import {
   loadNavermapsScript,
 } from "react-naver-maps"; // naver map 패키지 불러오기
 import { withNavermaps } from "react-naver-maps/dist/hocs-018c38ad";
+import useWindowSize from "../hooks/useWindowSize";
 
 const navermaps = window.naver.maps;
 
@@ -28,10 +29,15 @@ const sample = [
 ];
 
 function NaverMapAPI(props) {
-  const { isBottomSheetOpened, onMarkerClicked, onMapMoved } = { ...props };
+  const {
+    currentLocation,
+    isBottomSheetOpened,
+    onMarkerClicked,
+    onMapMoved,
+  } = { ...props };
   const [currentMarker, setCurrentMarker] = useState();
   const [mapRef, setMapRef] = useState();
-  // const mapRef = useRef();
+  const size = useWindowSize();
 
   const isSameMarker = (marker1, marker2) => {
     if (!marker1 || !marker2) return false;
@@ -70,6 +76,27 @@ function NaverMapAPI(props) {
       });
     }
   }, [mapRef]);
+
+  useEffect(() => {
+    if (mapRef) {
+      mapRef.panBy({
+        x: 0,
+        y: isBottomSheetOpened ? size.height * 0.2 : -size.height * 0.2,
+      });
+    }
+  }, [isBottomSheetOpened]);
+
+  useEffect(() => {
+    if (mapRef) {
+      var newCenter = new navermaps.LatLng(
+        currentLocation.lat,
+        currentLocation.lng
+      );
+      newCenter.y += isBottomSheetOpened ? -0.003 : +0.003;
+      newCenter._lat += isBottomSheetOpened ? -0.003 : +0.003;
+      mapRef.morph(newCenter);
+    }
+  }, [currentLocation]);
 
   const addMarker = (marker, isClicked) => {
     return (
