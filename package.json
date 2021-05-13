@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-naver-maps": "^0.0.13",
     "react-scripts": "2.0.3"
   },
   "scripts": {
