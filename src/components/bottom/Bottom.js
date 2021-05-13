@@ -2,15 +2,47 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BottomSheet } from "react-spring-bottom-sheet";
 
+const BottomSheetContent = ({ onDismiss }) => {
+  return (
+    <BottomSheetContentStyeld>
+      <p>
+        Using <strong>onDismiss</strong> lets users close the sheet by swiping
+        it down, tapping on the backdrop or by hitting <span>esc</span> on their
+        keyboard.
+      </p>
+      <div>
+        <div className="bg-gray-200 block rounded-md h-10 w-full my-10" />
+        <p>The height adjustment is done automatically, it just works™!</p>
+        <div className="bg-gray-200 block rounded-md h-10 w-full my-10" />
+      </div>
+      <button onClick={onDismiss} className="w-full">
+        Dismiss
+      </button>
+    </BottomSheetContentStyeld>
+  );
+};
+
+const BottomSheetContentStyeld = styled.div`
+  z-index: 9999;
+`;
+
 const Bottom = () => {
   const [open, setOpen] = useState(false);
+  function onDismiss() {
+    setOpen(false);
+  }
 
   return (
     <BottomContainer>
-      {/* drawer deprecated */}
-      {/* <SwipeableTemporaryDrawer /> */}
       <button onClick={() => setOpen((s) => !s)}>Open</button>
-      <BottomSheet open={open}>My awesome content here</BottomSheet>
+      <BottomSheet
+        open={open}
+        onDismiss={onDismiss}
+        snapPoints={({ minHeight }) => minHeight}
+        blocking={false}
+      >
+        <BottomSheetContent onDismiss={onDismiss} />
+      </BottomSheet>
     </BottomContainer>
   );
 };
