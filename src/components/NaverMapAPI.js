@@ -37,7 +37,7 @@ function NaverMapAPI() {
   return (
     <NaverMap
       mapDivId={"maps-getting-started-uncontrolled"}
-      style={{ width: "100vw", height: "105vh" }}
+      style={{ width: "100vw", height: "100vh" }}
       defaultCenter={{ lat: 37.554722, lng: 126.970833 }}
       defaultZoom={14}
     >

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import BottomModule from "../components/bottom/BottomModule";
 import SearchBar from "../components/SearchBar";
-import NaverMapC from "../components/NaverMapC";
 import {
   RenderAfterNavermapsLoaded,
   NaverMap,
