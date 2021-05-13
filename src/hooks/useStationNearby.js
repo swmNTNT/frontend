@@ -15,7 +15,17 @@ import { postApi } from "../api/evApi";
     "time": "20210513211044",
     "__v": 0
  */
-const useStationNearby = (minLat, maxLat, minLng, maxLng, userLat, userLng) => {
+// minLat, maxLat, minLng, maxLng,
+const useStationNearby = (userLat, userLng) => {
+  if (!userLat) {
+    userLat = "37.6075296";
+  }
+  if (!userLng) {
+    userLng = "127.0701823";
+  }
+  const [minLat, maxLat] = [Number(userLat) - 0.05, Number(userLat) + 0.05];
+  const [minLng, maxLng] = [Number(userLng) - 0.05, Number(userLng) + 0.05];
+
   const [state, setState] = useState({
     error: null,
     loading: true,
@@ -27,12 +37,12 @@ const useStationNearby = (minLat, maxLat, minLng, maxLng, userLat, userLng) => {
       setState((p) => ({ ...p, loading: false }));
       try {
         const res = await postApi.stationNearby({
-          minLat: "37.5875896",
-          maxLat: "37.6875296",
-          userLat: "37.6075296",
-          minLng: "127.0674823",
-          maxLng: "127.0771823",
-          userLng: "127.0701823",
+          minLat,
+          maxLat,
+          userLat,
+          minLng,
+          maxLng,
+          userLng,
         });
         // console.log(res);
         if (res.status === 200) {
