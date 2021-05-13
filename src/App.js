@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import BottomModule from "./components/bottom/BottomModule";
 import Header from "./components/Header";
 import NaverMapC from "./components/NaverMapC";
-import { RenderAfterNavermapsLoaded, NaverMap, Marker, loadNavermapsScript } from 'react-naver-maps'; // naver map 패키지 불러오기
+import {
+  RenderAfterNavermapsLoaded,
+  NaverMap,
+  Marker,
+  loadNavermapsScript,
+} from "react-naver-maps"; // naver map 패키지 불러오기
 
 import styled from "styled-components";
 
@@ -13,19 +18,14 @@ class App extends Component {
     return (
       <AppContainer>
         <Header />
-<<<<<<< HEAD
-        <NaverMapC />
-        <BottomModule />
-=======
         <RenderAfterNavermapsLoaded
-          ncpClientId={'wdd5w8xqhv'} // 자신의 네이버 계정에서 발급받은 Client ID
+          ncpClientId={"wdd5w8xqhv"} // 자신의 네이버 계정에서 발급받은 Client ID
           error={<p>Maps Load Error</p>}
           loading={<p>Maps Loading...</p>}
         >
           <NaverMapAPI />
         </RenderAfterNavermapsLoaded>
-        <Bottom />
->>>>>>> a4eb8476a5c99b2931c5bf06b5e9eca0574cdd9f
+        <BottomModule />
       </AppContainer>
     );
   }
@@ -33,11 +33,11 @@ class App extends Component {
 
 function addMarker(lat, lng) {
   return (
-    <Marker 
+    <Marker
       position={new navermaps.LatLng(lat, lng)}
       animation={navermaps.Animation.BOUNCE}
       onClick={() => {
-        alert("here is naver!")
+        alert("here is naver!");
       }}
     />
   );
@@ -45,43 +45,40 @@ function addMarker(lat, lng) {
 
 const sample = [
   {
-    lat: 37.554722, lng: 126.970833
+    lat: 37.554722,
+    lng: 126.970833,
   },
   {
-    lat: 37.553722, lng: 126.920833
+    lat: 37.553722,
+    lng: 126.920833,
   },
   {
-    lat: 37.553722, lng: 126.922833
+    lat: 37.553722,
+    lng: 126.922833,
   },
 ];
 
 function NaverMapAPI() {
-
   return (
     <NaverMap
-      mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
+      mapDivId={"maps-getting-started-uncontrolled"} // default: react-naver-map
       style={{
-        width: '100vw', // 네이버지도 가로 길이
-        height: '100vh' // 네이버지도 세로 길이
+        width: "100vw", // 네이버지도 가로 길이
+        height: "100vh", // 네이버지도 세로 길이
       }}
       defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
       defaultZoom={15} // 지도 초기 확대 배율
-      >
-
-      {
-        sample.map((pos) => (
-          <Marker 
-            position={new navermaps.LatLng(pos.lat, pos.lng)}
-            onClick={() => {
-              alert("here is naver!")
-            }}
-            icon='http://localhost:3000/marker.jpg'
-            // 'http://localhost:3000/public/marker.png'
-          />
-        ))
-      }
-
-
+    >
+      {sample.map((pos) => (
+        <Marker
+          position={new navermaps.LatLng(pos.lat, pos.lng)}
+          onClick={() => {
+            alert("here is naver!");
+          }}
+          icon="http://localhost:3000/marker.jpg"
+          // 'http://localhost:3000/public/marker.png'
+        />
+      ))}
     </NaverMap>
   );
 }
