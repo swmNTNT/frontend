@@ -33,6 +33,7 @@ const ViewModule = (props) => {
   // 현재 나의 위치가 바뀐 경우  - effect update
   useEffect(() => {
     if (
+      stationsState &&
       !stationsState.error &&
       !stationsState.loading &&
       stationsState.stations

@@ -64,4 +64,10 @@ const Bottom = ({ stationsState, ...props }) => {
   );
 };
 
+const BottomSheetContainer = styled.div`
+  div {
+    z-index: 101 !important;
+  }
+`;
+
 export default Bottom;
