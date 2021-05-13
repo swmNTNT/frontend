@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Bottom from "./components/bottom/Bottom";
+import BottomModule from "./components/bottom/BottomModule";
 import Header from "./components/Header";
 import NaverMapC from "./components/NaverMapC";
 
@@ -11,7 +11,7 @@ class App extends Component {
       <AppContainer>
         <Header />
         <NaverMapC />
-        <Bottom />
+        <BottomModule />
       </AppContainer>
     );
   }
