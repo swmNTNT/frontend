@@ -4,9 +4,12 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 
 import ViewModule from "./ViewModule";
 
-const Bottom = () => {
+const Bottom = (props) => {
+  const {onMyLocationClicked} = {...props};
   const sheetRef = useRef();
   const [isBottom, setIsBottom] = useState(false);
+
+
 
   /* --- resize section ---  */
   // 가장 작게 축소
@@ -47,7 +50,7 @@ const Bottom = () => {
         }}
       >
         <>
-          <ViewModule isBottom={isBottom} />
+          <ViewModule isBottom={isBottom} onMyLocationClicked={onMyLocationClicked} />
         </>
       </BottomSheet>
     </>
