@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
-import InfoIcon from "@material-ui/icons/Info";
-import GpsFixedIcon from "@material-ui/icons/GpsFixed";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+// import InfoIcon from "@material-ui/icons/Info";
+// import GpsFixedIcon from "@material-ui/icons/GpsFixed";
+// import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { IconButton } from "@material-ui/core";
 import {
   MyLocationRounded,

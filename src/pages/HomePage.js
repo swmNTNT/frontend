@@ -19,28 +19,17 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/SearchRounded";
 import NaverMapAPI from "../components/NaverMapAPI";
+import useStationNearby from "../hooks/useStationNearby";
 
-import { postApi } from "../api/evApi";
 const navermaps = window.naver.maps;
 
 function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [currentLocation, setCurrentLocation] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await postApi.stationNearby({
-        minLat: "37.5875896",
-        maxLat: "37.6875296",
-        minLng: "127.0674823",
-        maxLng: "127.0771823",
-      });
-      console.log(res);
-    };
-    fetchData();
-    return () => {};
-  }, []);
-
+  //useStationNearby
+  const stationsState = useStationNearby();
+  console.log(stationsState);
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -84,16 +73,23 @@ function HomePage() {
   );
 
   const getMyLocation = () => {
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        setCurrentLocation({ lat:position.coords.latitude, lng: position.coords.longitude })
-      }, function(error) {
-        console.error(error);
-      }, {
-        enableHighAccuracy: true
-      });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          setCurrentLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        function(error) {
+          console.error(error);
+        },
+        {
+          enableHighAccuracy: true,
+        }
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -106,7 +102,7 @@ function HomePage() {
       >
         <NaverMapAPI currentLocation={currentLocation} />
       </RenderAfterNavermapsLoaded>
-      <BottomModule onMyLocationClicked={getMyLocation}/>
+      <BottomModule onMyLocationClicked={getMyLocation} />
       <Drawer
         anchor="right"
         open={drawerOpened}
@@ -144,7 +140,5 @@ const sample = [
     lng: 126.922833,
   },
 ];
-
-
 
 export default HomePage;

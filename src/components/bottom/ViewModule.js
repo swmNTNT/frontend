@@ -7,8 +7,8 @@ import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
 // list moudle
 
 const ViewModule = (props) => {
-  const {isBottom, onMyLocationClicked} = {...props};
-  
+  const { isBottom, onMyLocationClicked } = { ...props };
+
   const [viewState] = useState({
     header: {},
     title: {
@@ -29,6 +29,8 @@ const ViewModule = (props) => {
       },
     ],
   });
+
+  // 현재 나의 위치가 바뀐 경우
 
   // 주변에 충전소가 없는 경우
 
