@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import InfoIcon from "@material-ui/icons/Info";
-
-const ViewHeader = () => {
+import GpsFixedIcon from "@material-ui/icons/GpsFixed";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+const ViewHeader = ({ ...props }) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <div className="logo">
         <img
           className="logoImg"
@@ -13,7 +14,27 @@ const ViewHeader = () => {
         ></img>
       </div>
       <div className="info">
-        <InfoIcon />
+        <GpsFixedIcon
+          onClick={() => {
+            console.log("clicked");
+          }}
+          className="icons"
+          htmlColor="#5F534A"
+        />
+        <ExitToAppIcon
+          onClick={() => {
+            console.log("clicked");
+          }}
+          className="icons"
+          htmlColor="#5F534A"
+        />
+        <InfoIcon
+          onClick={() => {
+            console.log("clicked");
+          }}
+          className="icons"
+          htmlColor="#5F534A"
+        />
       </div>
     </Wrapper>
   );
@@ -39,6 +60,14 @@ const Wrapper = styled.div`
     .logoImg {
       width: 80px;
       height: 30px;
+    }
+  }
+  .info {
+    .icons {
+      cursor: pointer;
+    }
+    .icons:not(:last-child) {
+      margin-right: 27px;
     }
   }
 `;

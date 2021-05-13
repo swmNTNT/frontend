@@ -2,20 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
 
-const ViewListItem = ({ props }) => {
+const ViewListItem = ({ subTitle, title, ...props }) => {
   return (
     <Wrapper>
-      <li className="col">
+      <div className="contentCol">
         <div className="icon">
-          <OfflineBoltIcon />
+          <OfflineBoltIcon htmlColor="#E2C707" />
         </div>
         <div className="baseInfo">
-          <div className="subTitle">2개 중 급속 1개﹒완속 1개 사용 가능</div>
-          <div className="title">SW마에스트로센터 지하주차장</div>
+          <div className="subTitle">{subTitle}</div>
+          <div className="title">{title}</div>
         </div>
-      </li>
-
-      <li className="col">360m</li>
+      </div>
+      <div className="">360m</div>
     </Wrapper>
   );
 };
@@ -25,7 +24,25 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .col {
+  background: #f2f0ea 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  opacity: 0.9;
+  min-height: 64px;
+  margin-bottom: 8px;
+  .contentCol {
+    display: flex;
+    .icon {
+      margin-right: 16px;
+    }
+    .baseInfo {
+      .subTitle {
+        font-size: 10px;
+      }
+      .title {
+        margin-top: 2px;
+        font-size: 16px;
+      }
+    }
   }
 `;
 

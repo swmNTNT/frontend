@@ -2,9 +2,15 @@ import React, { Component } from "react";
 import BottomModule from "./components/bottom/BottomModule";
 import Header from "./components/Header";
 import NaverMapC from "./components/NaverMapC";
-import { RenderAfterNavermapsLoaded, NaverMap, Marker, loadNavermapsScript } from 'react-naver-maps'; // naver map 패키지 불러오기
-import map from "./map"
+import {
+  RenderAfterNavermapsLoaded,
+  NaverMap,
+  Marker,
+  loadNavermapsScript,
+} from "react-naver-maps"; // naver map 패키지 불러오기
+import map from "./map";
 import styled from "styled-components";
+import MapComponent from "./MapComponent";
 
 const navermaps = window.naver.maps;
 
@@ -29,11 +35,13 @@ class App extends Component {
 function addMarker(lat, lng) {
   return (
     <Marker
+      // position={new navermaps.LatLng(37.551229, 126.988205)}
       position={new navermaps.LatLng(lat, lng)}
-      animation={navermaps.Animation.BOUNCE}
+      animation={2}
       onClick={() => {
         alert("here is naver!");
       }}
+      icon="http://localhost:3000/marker_unclicked.jpg"
     />
   );
 }
@@ -48,9 +56,10 @@ function NaverMapAPI() {
       }}
       defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
       defaultZoom={15} // 지도 초기 확대 배율
-      >
-
-
+    >
+      {addMarker(37.551229, 126.988205)}
+      {addMarker(37.351229, 126.988205)}
+      {addMarker(37.151229, 126.988205)}
     </NaverMap>
   );
 }

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const ViewState = () => {
+const ViewState = ({ leftState, rightState, ...props }) => {
   return (
-    <Wrapper>
-      <div className="left">급속충전 9개 ﹒완속충전 10개</div>
-      <div className="right">6개 사용 가능</div>
+    <Wrapper {...props}>
+      <div className="left">{leftState}</div>
+      <div className="right">{rightState}</div>
     </Wrapper>
   );
 };

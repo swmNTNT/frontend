@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const ViewTitle = () => {
+const ViewTitle = ({ title_text, ...props }) => {
   return (
-    <Wrapper>
-      <div>주변에 4개의 충전소</div>
+    <Wrapper {...props}>
+      <div>{title_text}</div>
     </Wrapper>
   );
 };

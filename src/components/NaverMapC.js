@@ -23,7 +23,6 @@ const NaverMapC = () => {
       defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
       defaultZoom={13} // 지도 초기 확대 배율
     >
-      {" "}
       <Polygon
         paths={[
           [

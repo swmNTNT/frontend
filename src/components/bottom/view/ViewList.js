@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { ViewListItem } from "./index";
-const ViewList = () => {
+const ViewList = ({ listItem, ...props }) => {
   return (
     <Wrapper>
-      <ul>
-        {[{}].map((e) => {
-          return <ViewListItem />;
-        })}
-      </ul>
+      <div>
+        {listItem &&
+          listItem.map((e) => {
+            return <ViewListItem subTitle={e.subTitle} title={e.title} />;
+          })}
+      </div>
     </Wrapper>
   );
 };
