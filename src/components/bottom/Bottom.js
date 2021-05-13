@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import SwipeableTemporaryDrawer from "./SwipeableTemporaryDrawer";
 
 const Bottom = () => {
-  return <div>Bottom</div>;
+  return (
+    <div>
+      <SwipeableTemporaryDrawer />
+    </div>
+  );
 };
 
 export default Bottom;
