@@ -1,8 +1,30 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import Bottom from "./components/bottom/Bottom";
+import Header from "./components/Header";
+import NaverMapC from "./components/NaverMapC";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, loadNavermapsScript } from 'react-naver-maps'; // naver map 패키지 불러오기
 
+import styled from "styled-components";
+
 const navermaps = window.naver.maps;
+
+class App extends Component {
+  render() {
+    return (
+      <AppContainer>
+        <Header />
+        <RenderAfterNavermapsLoaded
+          ncpClientId={'wdd5w8xqhv'} // 자신의 네이버 계정에서 발급받은 Client ID
+          error={<p>Maps Load Error</p>}
+          loading={<p>Maps Loading...</p>}
+        >
+          <NaverMapAPI />
+        </RenderAfterNavermapsLoaded>
+        <Bottom />
+      </AppContainer>
+    );
+  }
+}
 
 function addMarker(lat, lng) {
   return (
@@ -22,6 +44,9 @@ const sample = [
   },
   {
     lat: 37.553722, lng: 126.920833
+  },
+  {
+    lat: 37.553722, lng: 126.922833
   },
 ];
 
@@ -53,18 +78,6 @@ function NaverMapAPI() {
 
 
     </NaverMap>
-  );
-}
-
-function App() {
-  return (
-    <RenderAfterNavermapsLoaded
-      ncpClientId={'wdd5w8xqhv'} // 자신의 네이버 계정에서 발급받은 Client ID
-      error={<p>Maps Load Error</p>}
-      loading={<p>Maps Loading...</p>}
-    >
-      <NaverMapAPI />
-    </RenderAfterNavermapsLoaded>
   );
 }
 
