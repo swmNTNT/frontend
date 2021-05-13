@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   RenderAfterNavermapsLoaded,
   NaverMap,
@@ -34,10 +34,34 @@ function NaverMapAPI() {
     return marker1.lat === marker2.lat && marker1.lng === marker2.lng;
   };
 
+  useEffect(() => {
+    const cleanLogos = async () => {
+      let logo = document.querySelector(
+        "#react-naver-map > div:nth-child(2) > div:nth-child(2)"
+      );
+      if (logo) logo.remove();
+      logo = document.querySelector(
+        "#react-naver-map > div:nth-child(2) > div"
+      );
+      if (logo) logo.remove();
+      logo = document.querySelector("#react-naver-map > div:nth-child(3)");
+      if (logo) logo.remove();
+    };
+    cleanLogos();
+    const cl = setInterval(cleanLogos, 10);
+    const loopend = setTimeout(() => {
+      clearInterval(cl);
+    }, 3000);
+    return () => {
+      clearInterval(cl);
+      clearTimeout(loopend);
+    };
+  });
+
   return (
     <NaverMap
       mapDivId={"maps-getting-started-uncontrolled"}
-      style={{ width: "100vw", height: "105vh" }}
+      style={{ width: "100vw", height: "100vh" }}
       defaultCenter={{ lat: 37.554722, lng: 126.970833 }}
       defaultZoom={14}
     >
