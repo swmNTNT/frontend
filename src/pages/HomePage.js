@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BottomModule from "../components/bottom/BottomModule";
 import SearchBar from "../components/SearchBar";
-import NaverMapC from "../components/NaverMapC";
 import {
   RenderAfterNavermapsLoaded,
   NaverMap,
@@ -26,6 +25,7 @@ const navermaps = window.naver.maps;
 function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [currentLocation, setCurrentLocation] = useState();
+  const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,16 +84,23 @@ function HomePage() {
   );
 
   const getMyLocation = () => {
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        setCurrentLocation({ lat:position.coords.latitude, lng: position.coords.longitude })
-      }, function(error) {
-        console.error(error);
-      }, {
-        enableHighAccuracy: true
-      });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          setCurrentLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        function(error) {
+          console.error(error);
+        },
+        {
+          enableHighAccuracy: true,
+        }
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -104,9 +111,21 @@ function HomePage() {
         error={<p>Maps Load Error</p>}
         loading={<p>Maps Loading...</p>}
       >
-        <NaverMapAPI currentLocation={currentLocation} />
+        <NaverMapAPI
+          isBottomSheetOpened
+          onMarkerClicked={(id) => {}}
+          onMapMoved={(bound) => {}}
+        />
       </RenderAfterNavermapsLoaded>
-      <BottomModule onMyLocationClicked={getMyLocation}/>
+
+      {/* <div id="map" style={{ width: "100vw", height: "100vh" }} /> */}
+
+      <BottomModule
+        onOpened={() => console.log("opened")}
+        onClosed={() => console.log("closed")}
+        // onOpened={() => setIsBottomSheetOpened(true)}
+        // onClosed={() => setIsBottomSheetOpened(false)}
+      />
       <Drawer
         anchor="right"
         open={drawerOpened}
@@ -117,34 +136,5 @@ function HomePage() {
     </>
   );
 }
-
-function addMarker(lat, lng) {
-  return (
-    <Marker
-      position={new navermaps.LatLng(lat, lng)}
-      animation={navermaps.Animation.BOUNCE}
-      onClick={() => {
-        alert("here is naver!");
-      }}
-    />
-  );
-}
-
-const sample = [
-  {
-    lat: 37.554722,
-    lng: 126.970833,
-  },
-  {
-    lat: 37.553722,
-    lng: 126.920833,
-  },
-  {
-    lat: 37.553722,
-    lng: 126.922833,
-  },
-];
-
-
 
 export default HomePage;
