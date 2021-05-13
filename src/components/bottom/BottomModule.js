@@ -21,7 +21,7 @@ const Bottom = () => {
     sheetRef.current.snapTo(({ snapPoints }) => Math.max(...snapPoints));
 
   return (
-    <BottomContainer>
+    <>
       <BottomSheet
         ref={sheetRef}
         open
@@ -38,24 +38,8 @@ const Bottom = () => {
           <ViewModule />
         </>
       </BottomSheet>
-    </BottomContainer>
+    </>
   );
 };
 
 export default Bottom;
-
-const BottomContainer = styled.div`
-  /* position: fixed; */
-  /* bottom: 0; */
-  /* left: 0; */
-  width: 100%;
-  z-index: 3000;
-
-  height: 60vh;
-  background: #f8fafa 0% 0% no-repeat padding-box;
-  box-shadow: 0px -8px 8px #0000001a;
-  border-radius: 16px 16px 0px 0px;
-  opacity: 0.95;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-`;

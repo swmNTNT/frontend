@@ -7,7 +7,7 @@ import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
 // list moudle
 
 const ViewModule = () => {
-  const [viewState, setViewState] = useState({
+  const [viewState] = useState({
     header: {},
     title: {
       title_text: "주변에 4개의 충전소",

@@ -1,6 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import BottomModule from "../components/bottom/BottomModule";
-import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import NaverMapC from "../components/NaverMapC";
 import {
@@ -19,7 +18,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/SearchRounded";
-import NaverMapAPI from "../components/NaverMapAPI"
+import NaverMapAPI from "../components/NaverMapAPI";
 
 const navermaps = window.naver.maps;
 

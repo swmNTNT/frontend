@@ -4,7 +4,7 @@ import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
 
 const ViewListItem = ({ subTitle, title, ...props }) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <div className="contentCol">
         <div className="icon">
           <OfflineBoltIcon htmlColor="#E2C707" />
@@ -33,6 +33,9 @@ const Wrapper = styled.div`
     display: flex;
     .icon {
       margin-right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .baseInfo {
       .subTitle {
