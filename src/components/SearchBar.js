@@ -57,7 +57,9 @@ const SearchBarC = styled.div`
       resize: none;
     }
   }
-
+  textarea {
+    background-color: #fcfbf7;
+  }
   textarea:focus-visible {
     /* all: unset; */
     outline: none;

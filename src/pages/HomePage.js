@@ -16,7 +16,7 @@ function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [currentLocation, setCurrentLocation] = useState();
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(true);
-
+  console.log("currentLocation update", currentLocation);
   //
   const stationsState = useStationNearby(); // stationsState.stations
   // console.log(stationsState);
