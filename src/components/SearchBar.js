@@ -57,6 +57,11 @@ const SearchBarC = styled.div`
       resize: none;
     }
   }
+
+  textarea:focus-visible {
+    /* all: unset; */
+    outline: none;
+  }
 `;
 
 export default SearchBar;
