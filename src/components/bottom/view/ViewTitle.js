@@ -19,4 +19,5 @@ const Wrapper = styled.div`
   letter-spacing: 0px;
   color: #332922;
   opacity: 1;
+  font-weight: 700;
 `;

@@ -12,7 +12,6 @@ const ViewState = ({ leftState, rightState, ...props }) => {
 
 const Wrapper = styled.div`
   padding: 0px 16px;
-  margin-top: 10px;
 
   display: flex;
   align-items: center;

@@ -10,7 +10,7 @@ const ViewModule = () => {
   const [viewState, setViewState] = useState({
     header: {},
     title: {
-      title_text: "주변에 4개의 충전소!!",
+      title_text: "주변에 4개의 충전소",
     },
     state: {
       leftState: `급속충전 9개 ﹒완속충전 10개`,
@@ -40,7 +40,7 @@ const ViewModule = () => {
       <ViewTitle title_text={viewState.title.title_text || "타이틀"} />
       <ViewState
         leftState={viewState.state.leftState}
-        rightState={viewState.state.leftState}
+        rightState={viewState.state.rightState}
       />
       <ViewList listItem={viewState.list} />
     </ViewModuleStyeld>
