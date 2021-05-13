@@ -67,9 +67,13 @@ function HomePage() {
       style={{
         zIndex: 4000,
       }}
-    > 
-      <ViewTitle title_text={viewState.title.title_text} style={{
-        marginTop: 24}}/>
+    >
+      <ViewTitle
+        title_text={viewState.title.title_text}
+        style={{
+          marginTop: 24,
+        }}
+      />
       <ViewNotification notificationItem={viewState.list} />
     </div>
   );
@@ -103,7 +107,8 @@ function HomePage() {
         loading={<p>Maps Loading...</p>}
       >
         <NaverMapAPI
-          isBottomSheetOpened
+          isBottomSheetOpened={isBottomSheetOpened}
+          currentLocation={currentLocation}
           onMarkerClicked={(id) => {}}
           onMapMoved={(bound) => {}}
         />
@@ -113,10 +118,13 @@ function HomePage() {
 
       <BottomModule
         stationsState={stationsState}
-        onOpened={() => console.log("opened")}
-        onClosed={() => console.log("closed")}
-        // onOpened={() => setIsBottomSheetOpened(true)}
-        // onClosed={() => setIsBottomSheetOpened(false)}
+        onMyLocationClicked={getMyLocation}
+        onOpened={() => {
+          setIsBottomSheetOpened(true);
+        }}
+        onClosed={() => {
+          setIsBottomSheetOpened(false);
+        }}
       />
       <Drawer
         anchor="right"
