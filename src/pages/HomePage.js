@@ -19,10 +19,9 @@ import {
 import SearchIcon from "@material-ui/icons/SearchRounded";
 import NaverMapAPI from "../components/NaverMapAPI";
 
-const navermaps = window.naver.maps;
-
 function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
+  const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(true);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -75,9 +74,21 @@ function HomePage() {
         error={<p>Maps Load Error</p>}
         loading={<p>Maps Loading...</p>}
       >
-        <NaverMapAPI />
+        <NaverMapAPI
+          isBottomSheetOpened
+          onMarkerClicked={(id) => {}}
+          onMapMoved={(bound) => {}}
+        />
       </RenderAfterNavermapsLoaded>
-      <BottomModule />
+
+      {/* <div id="map" style={{ width: "100vw", height: "100vh" }} /> */}
+
+      <BottomModule
+        onOpened={() => console.log("opened")}
+        onClosed={() => console.log("closed")}
+        // onOpened={() => setIsBottomSheetOpened(true)}
+        // onClosed={() => setIsBottomSheetOpened(false)}
+      />
       <Drawer
         anchor="right"
         open={drawerOpened}

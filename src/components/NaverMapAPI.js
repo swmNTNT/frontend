@@ -5,26 +5,30 @@ import {
   Marker,
   loadNavermapsScript,
 } from "react-naver-maps"; // naver map 패키지 불러오기
+import { withNavermaps } from "react-naver-maps/dist/hocs-018c38ad";
 
 const navermaps = window.naver.maps;
 
 const sample = [
   {
+    id: 1,
     lat: 37.554722,
     lng: 126.970833,
   },
   {
+    id: 2,
     lat: 37.353722,
     lng: 126.920833,
   },
   {
+    id: 3,
     lat: 37.553722,
     lng: 126.922833,
   },
 ];
 
 function NaverMapAPI(props) {
-  const { position } = { ...props };
+  const { isBottomSheetOpened, onMarkerClicked, onMapMoved } = { ...props };
   const [currentMarker, setCurrentMarker] = useState();
   const [mapRef, setMapRef] = useState();
   // const mapRef = useRef();
@@ -36,14 +40,37 @@ function NaverMapAPI(props) {
 
   useEffect(() => {
     if (mapRef) {
-      console.log(mapRef);
-      mapRef.setOptions({
-        logoControl: false,
-      });
+      console.log(mapRef.map.center.x);
 
-      console.log(mapRef.getBounds());
+      navermaps.Event.addListener(mapRef.map, "idle", function() {
+        onMapMoved(mapRef.getBounds());
+      });
     }
   }, [mapRef]);
+
+  const addMarker = (marker, isClicked) => {
+    return (
+      <Marker
+        position={new navermaps.LatLng(marker.lat, marker.lng)}
+        icon={
+          isClicked
+            ? "http://localhost:3000/marker_clicked.jpg"
+            : "http://localhost:3000/marker_normal.png"
+        }
+        onClick={() => {
+          mapRef.morph(
+            isBottomSheetOpened
+              ? new navermaps.LatLng(marker.lat - 0.003, marker.lng)
+              : new navermaps.LatLng(marker.lat, marker.lng),
+            16
+          );
+          setCurrentMarker(marker);
+          // mapRef.panBy({ x: 0, y: 200 });
+          onMarkerClicked(marker.id);
+        }}
+      />
+    );
+  };
 
   return (
     <NaverMap
@@ -57,28 +84,9 @@ function NaverMapAPI(props) {
       logoControl={false}
     >
       {sample.map((pos) =>
-        addMarker(
-          pos.lat,
-          pos.lng,
-          isSameMarker(pos, currentMarker),
-          setCurrentMarker
-        )
+        addMarker(pos, isSameMarker(pos, currentMarker), setCurrentMarker)
       )}
     </NaverMap>
-  );
-}
-
-function addMarker(lat, lng, isClicked, setCurrentMarker) {
-  return (
-    <Marker
-      position={new navermaps.LatLng(lat, lng)}
-      icon={
-        isClicked
-          ? "http://localhost:3000/marker_clicked.jpg"
-          : "http://localhost:3000/marker_normal.png"
-      }
-      onClick={() => setCurrentMarker({ lat, lng })}
-    />
   );
 }
 

@@ -4,7 +4,8 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 
 import ViewModule from "./ViewModule";
 
-const Bottom = () => {
+const BottomModule = (props) => {
+  const { onOpened, onClosed } = { ...props };
   const sheetRef = useRef();
 
   /* --- resize section ---  */
@@ -33,18 +34,6 @@ const Bottom = () => {
           maxHeight * 0.6,
         ]}
         blocking={false}
-        onAnimationIteration={() => {
-          console.log("a");
-        }}
-        onSpringStart={() => {
-          console.log("Transition from:", sheetRef.current.height);
-          requestAnimationFrame(() =>
-            console.log("Transition to:", sheetRef.current.height)
-          );
-        }}
-        onSpringEnd={() =>
-          console.log("Finished transition to:", sheetRef.current.height)
-        }
       >
         <>
           <ViewModule />
@@ -60,4 +49,4 @@ const BottomSheetContainer = styled.div`
   }
 `;
 
-export default Bottom;
+export default BottomModule;
