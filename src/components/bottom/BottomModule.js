@@ -25,6 +25,8 @@ const Bottom = () => {
       <BottomSheet
         ref={sheetRef}
         open
+        // 초기 높이값
+        defaultSnap={({ maxHeight }) => maxHeight / 2}
         snapPoints={({ maxHeight }) => [
           maxHeight - maxHeight / 10,
           maxHeight / 4,
