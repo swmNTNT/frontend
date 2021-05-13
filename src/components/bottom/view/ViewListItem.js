@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
 
-const ViewListItem = ({ subTitle, title, ...props }) => {
+const ViewListItem = ({ subTitle, title, dist, ...props }) => {
   return (
     <Wrapper {...props}>
       <div className="contentCol">
@@ -14,7 +14,7 @@ const ViewListItem = ({ subTitle, title, ...props }) => {
           <div className="title">{title}</div>
         </div>
       </div>
-      <div className="">360m</div>
+      <div className="">{dist}</div>
     </Wrapper>
   );
 };

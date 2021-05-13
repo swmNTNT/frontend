@@ -7,7 +7,13 @@ const ViewList = ({ listItem, disappear, ...props }) => {
       <div>
         {listItem &&
           listItem.map((e) => {
-            return <ViewListItem subTitle={e.subTitle} title={e.title} />;
+            return (
+              <ViewListItem
+                subTitle={e.subTitle}
+                title={e.title}
+                dist={e.dist}
+              />
+            );
           })}
       </div>
     </Wrapper>

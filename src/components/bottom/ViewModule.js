@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
+import { computeDistance } from "../../utils/computeDistance";
 // header
 
 // state
@@ -22,14 +23,17 @@ const ViewModule = (props) => {
       {
         subTitle: "2개 중 급속 1개﹒완속 1개 사용 가능",
         title: "SW마에스트로센터 지하주차장",
+        dist: "360m",
       },
       {
         subTitle: "2개 중 급속 1개﹒완속 1개 사용 불가능",
         title: "코딩의 몽환의 숲",
+        dist: "360m",
       },
     ],
   });
   console.log("stationsState", stationsState);
+
   // 현재 나의 위치가 바뀐 경우  - effect update
   useEffect(() => {
     if (
@@ -49,10 +53,18 @@ const ViewModule = (props) => {
         (st) => st.chgerStat === "2" && st.type === "02"
       ).length;
 
-      const tmp_list = stations.slice(0, 5).map((st) => ({
-        subTitle: `2개 중 급속 1개﹒완속 1개 사용 불가능`,
-        title: `${st.stNm}`,
-      }));
+      const tmp_list = stations.slice(0, 5).map((st) => {
+        const dist = computeDistance(
+          { latitude: 37.5875896, longitude: 127.0674823 },
+          { latitude: Number(st.lat), longitude: Number(st.lng) }
+        );
+        return {
+          // subTitle: `2개 중 급속 1개﹒완속 1개 사용 불가능`,
+          subTitle: `${st.addr}`,
+          title: `${st.stNm}`,
+          dist: dist ? `${dist.toFixed(2)}Km` : "알 수 없음",
+        };
+      });
 
       setViewState((prev) => ({
         ...prev,
