@@ -18,10 +18,10 @@ import { postApi } from "../api/evApi";
 // minLat, maxLat, minLng, maxLng,
 const useStationNearby = (userLat, userLng) => {
   if (!userLat) {
-    userLat = "37.6075296";
+    userLat = "37.554722";
   }
   if (!userLng) {
-    userLng = "127.0701823";
+    userLng = "126.970833";
   }
   const [minLat, maxLat] = [Number(userLat) - 0.05, Number(userLat) + 0.05];
   const [minLng, maxLng] = [Number(userLng) - 0.05, Number(userLng) + 0.05];

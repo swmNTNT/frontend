@@ -53,16 +53,16 @@ const ViewModule = (props) => {
         (st) => st.chgerStat === "2" && st.type === "02"
       ).length;
 
-      const tmp_list = stations.slice(0, 15).map((st) => {
-        const dist = computeDistance(
-          { latitude: 37.5875896, longitude: 127.0674823 },
-          { latitude: Number(st.lat), longitude: Number(st.lng) }
-        );
+      const tmp_list = stations.slice(0, 30).map((st) => {
+        // const dist = computeDistance(
+        //   { latitude: 37.5875896, longitude: 127.0674823 },
+        //   { latitude: Number(st.lat), longitude: Number(st.lng) }
+        // );
         return {
           // subTitle: `2개 중 급속 1개﹒완속 1개 사용 불가능`,
           subTitle: `${st.addr}`,
           title: `${st.stNm}`,
-          dist: dist ? `${dist.toFixed(2)}Km` : "알 수 없음",
+          dist: st.distanceFrom ? `${st.distanceFrom}m` : "알 수 없음",
         };
       });
 
