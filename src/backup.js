@@ -3,7 +3,7 @@ import Bottom from "./components/bottom/Bottom";
 import Header from "./components/Header";
 import NaverMapC from "./components/NaverMapC";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker, loadNavermapsScript } from 'react-naver-maps'; // naver map 패키지 불러오기
-import map from "./map"
+
 import styled from "styled-components";
 
 const navermaps = window.naver.maps;
@@ -38,6 +38,18 @@ function addMarker(lat, lng) {
   );
 }
 
+const sample = [
+  {
+    lat: 37.554722, lng: 126.970833
+  },
+  {
+    lat: 37.553722, lng: 126.920833
+  },
+  {
+    lat: 37.553722, lng: 126.922833
+  },
+];
+
 function NaverMapAPI() {
 
   return (
@@ -51,13 +63,22 @@ function NaverMapAPI() {
       defaultZoom={15} // 지도 초기 확대 배율
       >
 
+      {
+        sample.map((pos) => (
+          <Marker 
+            position={new navermaps.LatLng(pos.lat, pos.lng)}
+            onClick={() => {
+              alert("here is naver!")
+            }}
+            icon='http://localhost:3000/marker.jpg'
+            // 'http://localhost:3000/public/marker.png'
+          />
+        ))
+      }
+
 
     </NaverMap>
   );
 }
 
-const AppContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
 export default App;
