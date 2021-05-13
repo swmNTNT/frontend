@@ -53,7 +53,7 @@ const ViewModule = (props) => {
         (st) => st.chgerStat === "2" && st.type === "02"
       ).length;
 
-      const tmp_list = stations.slice(0, 5).map((st) => {
+      const tmp_list = stations.slice(0, 15).map((st) => {
         const dist = computeDistance(
           { latitude: 37.5875896, longitude: 127.0674823 },
           { latitude: Number(st.lat), longitude: Number(st.lng) }

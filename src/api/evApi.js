@@ -5,8 +5,15 @@ const api = axios.create({
 });
 
 export const postApi = {
-  stationNearby: ({ minLat, maxLat, minLng, maxLng }) => {
-    return api.post("/station/nearby", { minLat, maxLat, minLng, maxLng });
+  stationNearby: ({ minLat, maxLat, minLng, maxLng, userLat, userLng }) => {
+    return api.post("/station/nearby", {
+      minLat,
+      maxLat,
+      minLng,
+      maxLng,
+      userLat,
+      userLng,
+    });
   },
 };
 

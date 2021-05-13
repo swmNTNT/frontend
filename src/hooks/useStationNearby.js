@@ -15,7 +15,7 @@ import { postApi } from "../api/evApi";
     "time": "20210513211044",
     "__v": 0
  */
-const useStationNearby = (minLat, maxLat, minLng, maxLng) => {
+const useStationNearby = (minLat, maxLat, minLng, maxLng, userLat, userLng) => {
   const [state, setState] = useState({
     error: null,
     loading: true,
@@ -29,8 +29,10 @@ const useStationNearby = (minLat, maxLat, minLng, maxLng) => {
         const res = await postApi.stationNearby({
           minLat: "37.5875896",
           maxLat: "37.6875296",
+          userLat: "37.6075296",
           minLng: "127.0674823",
           maxLng: "127.0771823",
+          userLng: "127.0701823",
         });
         // console.log(res);
         if (res.status === 200) {
