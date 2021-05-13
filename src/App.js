@@ -14,7 +14,9 @@ function App() {
   return (
     <Router>
       <CssBaseline />
-      <div style={{ backgroundColor: "#FCFBF7" }}>
+      <div
+        style={{ backgroundColor: "#FCFBF7", width: "100vw", height: "100vh" }}
+      >
         <Suspense fallback={<div></div>}>
           <Switch>
             <Route exact path="/" component={HomePage} />

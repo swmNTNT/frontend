@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import BottomModule from "../components/bottom/BottomModule";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
@@ -9,16 +9,68 @@ import {
   Marker,
   loadNavermapsScript,
 } from "react-naver-maps"; // naver map 패키지 불러오기
-
 import styled from "styled-components";
+
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/SearchRounded";
 
 const navermaps = window.naver.maps;
 
 function HomePage() {
+  const [drawerOpened, setDrawerOpened] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setDrawerOpened(open);
+  };
+
+  const list = (
+    <div
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+      style={{
+        zIndex: 4000,
+      }}
+    >
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <SearchIcon /> : <SearchIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <SearchIcon /> : <SearchIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+
   return (
-    <AppContainer>
-      <Header />
-      <SearchBar />
+    <>
+      <SearchBar onNotificationDrawerButtonClicked={toggleDrawer(true)} />
+
       <RenderAfterNavermapsLoaded
         ncpClientId={"wdd5w8xqhv"} // 자신의 네이버 계정에서 발급받은 Client ID
         error={<p>Maps Load Error</p>}
@@ -27,7 +79,14 @@ function HomePage() {
         <NaverMapAPI />
       </RenderAfterNavermapsLoaded>
       <BottomModule />
-    </AppContainer>
+      <Drawer
+        anchor="right"
+        open={drawerOpened}
+        onBackdropClick={toggleDrawer(false)}
+      >
+        {list}
+      </Drawer>
+    </>
   );
 }
 
@@ -84,8 +143,3 @@ function NaverMapAPI() {
 }
 
 export default HomePage;
-
-const AppContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;

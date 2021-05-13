@@ -1,51 +1,62 @@
 import React from "react";
 import styled from "styled-components";
+import { IconButton } from "@material-ui/core";
 import NotificationIcon from "@material-ui/icons/NotificationsActiveRounded";
 import SearchIcon from "@material-ui/icons/SearchRounded";
 
-export default function StyledComponents({ ...props }) {
+function SearchBar(props) {
+  const { onNotificationDrawerButtonClicked } = { ...props };
+
   return (
-    <SearchBar>
+    <SearchBarC>
       <div className="wrapper">
-        <SearchIcon className="search" />
+        <IconButton>
+          <SearchIcon />
+        </IconButton>
 
-        <div className="title">EVLINE</div>
+        <textarea
+          className="title"
+          placeholder="충전소를 검색해보세요"
+          cols="5"
+          rows="1"
+        ></textarea>
 
-        <NotificationIcon className="notifications" />
+        <IconButton onClick={onNotificationDrawerButtonClicked}>
+          <NotificationIcon />
+        </IconButton>
       </div>
-    </SearchBar>
+    </SearchBarC>
   );
 }
 
-const SearchBar = styled.div`
+const SearchBarC = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   background: #fcfbf7;
-  height: 64px;
-  margin: 16px;
+  width: calc(100% - 24px);
+  height: 56px;
+  margin: 12px;
   border-radius: 16px;
   box-shadow: 0px 4px 4px #00000029;
   opacity: 0.9;
-  z-index: 3000;
+  z-index: 1000;
 
   .wrapper {
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
-    padding: 0 16px;
     justify-content: space-between;
     align-items: center;
+
     .title {
-      font-size: 20px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    .search {
-      cursor: pointer;
-    }
-    .notifications {
-      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      align-text: middle;
+      border: none;
+      resize: none;
     }
   }
 `;
+
+export default SearchBar;
