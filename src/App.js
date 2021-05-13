@@ -1,18 +1,25 @@
 import React, { Component } from "react";
 import Bottom from "./components/bottom/Bottom";
 import Header from "./components/Header";
-import TmpNaverMap from "./components/TmpNaverMap";
+import NaverMapC from "./components/NaverMapC";
+
+import styled from "styled-components";
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <AppContainer>
         <Header />
-        <TmpNaverMap />
+        <NaverMapC />
         <Bottom />
-      </div>
+      </AppContainer>
     );
   }
 }
 
 export default App;
+
+const AppContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
