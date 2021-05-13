@@ -25,7 +25,7 @@ function HomePage() {
     currentLocation.lat,
     currentLocation.lng
   ); // stationsState.stations
-  // console.log(stationsState);
+  console.log(stationsState);
 
   const [viewState] = useState({
     header: {},
@@ -105,6 +105,7 @@ function HomePage() {
           currentLocation={currentLocation}
           onMarkerClicked={(id) => {}}
           onMapMoved={(bound) => {}}
+          stationsState={stationsState}
         />
       </RenderAfterNavermapsLoaded>
 

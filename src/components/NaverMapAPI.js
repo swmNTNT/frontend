@@ -34,6 +34,7 @@ function NaverMapAPI(props) {
     isBottomSheetOpened,
     onMarkerClicked,
     onMapMoved,
+    stationsState,
   } = { ...props };
   const [currentMarker, setCurrentMarker] = useState();
   const [mapRef, setMapRef] = useState();
@@ -133,9 +134,26 @@ function NaverMapAPI(props) {
       defaultZoom={14}
       logoControl={false}
     >
-      {sample.map((pos) =>
+      {stationsState.stations.map((s) => {
+        const pos = {
+          lat: Number(s.lat),
+          lng: Number(s.lng),
+        };
+        return addMarker(
+          pos,
+          isSameMarker(pos, currentMarker),
+          setCurrentMarker
+        );
+      })
+      // {
+      //   id: 1,
+      //   lat: 37.554722,
+      //   lng: 126.970833,
+      // },
+      }
+      {/* {sample.map((pos) =>
         addMarker(pos, isSameMarker(pos, currentMarker), setCurrentMarker)
-      )}
+      )} */}
     </NaverMap>
   );
 }
