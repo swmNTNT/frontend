@@ -89,31 +89,4 @@ function HomePage() {
   );
 }
 
-function addMarker(lat, lng) {
-  return (
-    <Marker
-      position={new navermaps.LatLng(lat, lng)}
-      animation={navermaps.Animation.BOUNCE}
-      onClick={() => {
-        alert("here is naver!");
-      }}
-    />
-  );
-}
-
-const sample = [
-  {
-    lat: 37.554722,
-    lng: 126.970833,
-  },
-  {
-    lat: 37.553722,
-    lng: 126.920833,
-  },
-  {
-    lat: 37.553722,
-    lng: 126.922833,
-  },
-];
-
 export default HomePage;

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { BottomSheet } from "react-spring-bottom-sheet";
 
@@ -21,7 +21,7 @@ const Bottom = () => {
     sheetRef.current.snapTo(({ snapPoints }) => Math.max(...snapPoints));
 
   return (
-    <>
+    <BottomSheetContainer>
       <BottomSheet
         ref={sheetRef}
         open
@@ -33,13 +33,31 @@ const Bottom = () => {
           maxHeight * 0.6,
         ]}
         blocking={false}
+        onAnimationIteration={() => {
+          console.log("a");
+        }}
+        onSpringStart={() => {
+          console.log("Transition from:", sheetRef.current.height);
+          requestAnimationFrame(() =>
+            console.log("Transition to:", sheetRef.current.height)
+          );
+        }}
+        onSpringEnd={() =>
+          console.log("Finished transition to:", sheetRef.current.height)
+        }
       >
         <>
           <ViewModule />
         </>
       </BottomSheet>
-    </>
+    </BottomSheetContainer>
   );
 };
+
+const BottomSheetContainer = styled.div`
+  div {
+    z-index: 101 !important;
+  }
+`;
 
 export default Bottom;

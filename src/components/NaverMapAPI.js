@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useRef, useEffect } from "react";
 import {
   RenderAfterNavermapsLoaded,
   NaverMap,
@@ -7,9 +7,6 @@ import {
 } from "react-naver-maps"; // naver map 패키지 불러오기
 
 const navermaps = window.naver.maps;
-
-var prevMarker = null;
-var currMarker = null;
 
 const sample = [
   {
@@ -26,20 +23,38 @@ const sample = [
   },
 ];
 
-function NaverMapAPI() {
+function NaverMapAPI(props) {
+  const { position } = { ...props };
   const [currentMarker, setCurrentMarker] = useState();
+  const [mapRef, setMapRef] = useState();
+  // const mapRef = useRef();
 
   const isSameMarker = (marker1, marker2) => {
     if (!marker1 || !marker2) return false;
     return marker1.lat === marker2.lat && marker1.lng === marker2.lng;
   };
 
+  useEffect(() => {
+    if (mapRef) {
+      console.log(mapRef);
+      mapRef.setOptions({
+        logoControl: false,
+      });
+
+      console.log(mapRef.getBounds());
+    }
+  }, [mapRef]);
+
   return (
     <NaverMap
+      naverRef={(ref) => {
+        setMapRef(ref);
+      }}
       mapDivId={"maps-getting-started-uncontrolled"}
       style={{ width: "100vw", height: "100vh" }}
       defaultCenter={{ lat: 37.554722, lng: 126.970833 }}
       defaultZoom={14}
+      logoControl={false}
     >
       {sample.map((pos) =>
         addMarker(
@@ -65,10 +80,6 @@ function addMarker(lat, lng, isClicked, setCurrentMarker) {
       onClick={() => setCurrentMarker({ lat, lng })}
     />
   );
-}
-
-function clickMarkerHandler() {
-  alert("click!");
 }
 
 export default NaverMapAPI;
