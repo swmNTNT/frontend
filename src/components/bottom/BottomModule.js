@@ -53,7 +53,6 @@ const Bottom = () => {
             }
           });
         }}
-        footer={() => <div></div>}
       >
         <>
           <ViewModule ref={rootRef} isBottom={isBottom} />
