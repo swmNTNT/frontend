@@ -6,7 +6,7 @@ import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
 // state
 // list moudle
 
-const ViewModule = () => {
+const ViewModule = ({ isBottom, ...props }) => {
   const [viewState] = useState({
     header: {},
     title: {
@@ -35,14 +35,14 @@ const ViewModule = () => {
   // 특정 충전소를 누른 경우
 
   return (
-    <ViewModuleStyeld>
+    <ViewModuleStyeld {...props}>
       <ViewHeader />
       <ViewTitle title_text={viewState.title.title_text || "타이틀"} />
       <ViewState
         leftState={viewState.state.leftState}
         rightState={viewState.state.rightState}
       />
-      <ViewList listItem={viewState.list} />
+      <ViewList listItem={viewState.list} disappear={isBottom} />
     </ViewModuleStyeld>
   );
 };

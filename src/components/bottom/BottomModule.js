@@ -6,6 +6,7 @@ import ViewModule from "./ViewModule";
 
 const Bottom = () => {
   const sheetRef = useRef();
+  const [isBottom, setIsBottom] = useState(false);
 
   /* --- resize section ---  */
   // 가장 작게 축소
@@ -26,16 +27,27 @@ const Bottom = () => {
         ref={sheetRef}
         open
         // 초기 높이값
-        defaultSnap={({ maxHeight }) => maxHeight / 2}
+        defaultSnap={({ maxHeight }) => maxHeight / 4}
         snapPoints={({ maxHeight }) => [
-          maxHeight - maxHeight / 10,
+          // maxHeight - maxHeight / 10,
           maxHeight / 4,
           maxHeight * 0.6,
         ]}
         blocking={false}
+        onSpringStart={() => {
+          // console.log("Transition from:", sheetRef.current.height);
+          requestAnimationFrame(() => {
+            // console.log("Transition to:", sheetRef.current.height);
+            if (sheetRef.current.height < 200) {
+              setIsBottom(true);
+            } else {
+              setIsBottom(false);
+            }
+          });
+        }}
       >
         <>
-          <ViewModule />
+          <ViewModule isBottom={isBottom} />
         </>
       </BottomSheet>
     </>

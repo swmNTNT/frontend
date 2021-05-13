@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { ViewListItem } from "./index";
-const ViewList = ({ listItem, ...props }) => {
+const ViewList = ({ listItem, disappear, ...props }) => {
   return (
-    <Wrapper>
+    <Wrapper disappear={disappear}>
       <div>
         {listItem &&
           listItem.map((e) => {
@@ -17,6 +17,9 @@ const ViewList = ({ listItem, ...props }) => {
 const Wrapper = styled.div`
   padding: 0 16px;
   margin-top: 16px;
+
+  opacity: ${(props) => (props.disappear ? 0 : 1)};
+  transition: 0.2s opacity ease-in-out;
 `;
 
 export default ViewList;
