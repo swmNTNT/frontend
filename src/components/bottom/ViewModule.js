@@ -37,13 +37,33 @@ const ViewModule = (props) => {
       !stationsState.loading &&
       stationsState.stations
     ) {
-      console.log("stationsState.stations", stationsState.stations);
-      const count_nearbyStation = stationsState.stations.length;
+      const stations = stationsState.stations;
+      console.log("stationsState.stations", stations);
+      const count_nearbyStation = stations.length;
+
+      const cntAllCharge = stations.filter((st) => st.chgerStat === "2").length;
+
+      console.log("cntAllCharge", cntAllCharge);
+      const cntSlowCharge = stations.filter(
+        (st) => st.chgerStat === "2" && st.type === "02"
+      ).length;
+
+      const tmp_list = stations.slice(0, 5).map((st) => ({
+        subTitle: `2개 중 급속 1개﹒완속 1개 사용 불가능`,
+        title: `${st.stNm}`,
+      }));
+
       setViewState((prev) => ({
         ...prev,
         title: {
           title_text: `주변에 ${count_nearbyStation}개의 충전소`,
         },
+        state: {
+          leftState: `급속충전 ${cntAllCharge -
+            cntSlowCharge}개 ﹒완속충전 ${cntSlowCharge}개`,
+          rightState: `${cntAllCharge}개 사용 가능`,
+        },
+        list: tmp_list,
       }));
     }
     return () => {};
