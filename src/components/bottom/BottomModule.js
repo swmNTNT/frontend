@@ -9,6 +9,8 @@ const Bottom = () => {
   const sheetRef = useRef();
   const [isBottom, setIsBottom] = useState(false);
 
+
+
   /* --- resize section ---  */
   // 가장 작게 축소
   const handle_snapToBottom = () =>

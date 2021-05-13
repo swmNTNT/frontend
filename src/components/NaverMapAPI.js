@@ -13,16 +13,13 @@ var currMarker = null;
 
 const sample = [
   {
-    lat: 37.554722,
-    lng: 126.970833,
+    lat: 37.554722, lng: 126.970833
   },
   {
-    lat: 37.353722,
-    lng: 126.920833,
+    lat: 37.353722, lng: 126.920833
   },
   {
-    lat: 37.553722,
-    lng: 126.922833,
+    lat: 37.553722, lng: 126.922833
   },
 ];
 
@@ -78,21 +75,13 @@ function NaverMapAPI() {
 }
 
 function addMarker(lat, lng, isClicked, setCurrentMarker) {
-  return (
-    <Marker
-      position={new navermaps.LatLng(lat, lng)}
-      icon={
-        isClicked
-          ? "http://localhost:3000/marker_clicked.jpg"
-          : "http://localhost:3000/marker_normal.png"
-      }
-      onClick={() => setCurrentMarker({ lat, lng })}
-    />
-  );
-}
-
-function clickMarkerHandler() {
-  alert("click!");
+    return (
+        <Marker 
+            position={new navermaps.LatLng(lat, lng)}
+            icon={isClicked ? "http://localhost:3000/marker_clicked.jpg" : "http://localhost:3000/marker_normal.png"}
+            onClick={() => setCurrentMarker({lat, lng})}
+        />
+    )
 }
 
 export default NaverMapAPI;

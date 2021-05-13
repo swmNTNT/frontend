@@ -25,6 +25,7 @@ const navermaps = window.naver.maps;
 
 function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,6 +83,18 @@ function HomePage() {
     </div>
   );
 
+  const getMyLocation = () => {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        setCurrentLocation({ lat:position.coords.latitude, lng: position.coords.longitude })
+      }, function(error) {
+        console.error(error);
+      }, {
+        enableHighAccuracy: true
+      });
+    }
+  }
+
   return (
     <>
       <SearchBar onNotificationDrawerButtonClicked={toggleDrawer(true)} />
@@ -91,9 +104,9 @@ function HomePage() {
         error={<p>Maps Load Error</p>}
         loading={<p>Maps Loading...</p>}
       >
-        <NaverMapAPI />
+        <NaverMapAPI currentLocation={currentLocation} />
       </RenderAfterNavermapsLoaded>
-      <BottomModule />
+      <BottomModule onMyLocationClicked={getMyLocation}/>
       <Drawer
         anchor="right"
         open={drawerOpened}
@@ -131,5 +144,7 @@ const sample = [
     lng: 126.922833,
   },
 ];
+
+
 
 export default HomePage;

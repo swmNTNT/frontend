@@ -6,7 +6,9 @@ import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
 // state
 // list moudle
 
-const ViewModule = ({ isBottom, ...props }) => {
+const ViewModule = (props) => {
+  const {isBottom, onMyLocationClicked} = {...props};
+  
   const [viewState] = useState({
     header: {},
     title: {
@@ -36,7 +38,7 @@ const ViewModule = ({ isBottom, ...props }) => {
 
   return (
     <ViewModuleStyeld {...props}>
-      <ViewHeader />
+      <ViewHeader onMyLocationClicked={onMyLocationClicked} />
       <ViewTitle title_text={viewState.title.title_text || "타이틀"} />
       <ViewState
         leftState={viewState.state.leftState}
