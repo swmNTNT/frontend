@@ -32,7 +32,7 @@ const ViewModule = (props) => {
       },
     ],
   });
-  console.log("stationsState", stationsState);
+  // console.log("stationsState", stationsState);
 
   // 현재 나의 위치가 바뀐 경우  - effect update
   useEffect(() => {
@@ -43,12 +43,12 @@ const ViewModule = (props) => {
       stationsState.stations
     ) {
       const stations = stationsState.stations;
-      console.log("stationsState.stations", stations);
+      // console.log("stationsState.stations", stations);
       const count_nearbyStation = stations.length;
 
       const cntAllCharge = stations.filter((st) => st.chgerStat === "2").length;
 
-      console.log("cntAllCharge", cntAllCharge);
+      // console.log("cntAllCharge", cntAllCharge);
       const cntSlowCharge = stations.filter(
         (st) => st.chgerStat === "2" && st.type === "02"
       ).length;
