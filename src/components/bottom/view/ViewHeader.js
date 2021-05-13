@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import InfoIcon from "@material-ui/icons/Info";
 import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 const ViewHeader = ({ ...props }) => {
+  const [currentLocation, setCurrentLocation] = useState();
+
   return (
     <Wrapper {...props}>
       <div className="logo">
@@ -16,7 +18,7 @@ const ViewHeader = ({ ...props }) => {
       <div className="info">
         <GpsFixedIcon
           onClick={() => {
-            console.log("clicked");
+            getLocation(setCurrentLocation);
           }}
           className="icons"
           htmlColor="#5F534A"
@@ -39,6 +41,20 @@ const ViewHeader = ({ ...props }) => {
     </Wrapper>
   );
 };
+
+function getLocation(setCurrentLocation) {
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      alert(position.coords.latitude + ', ' + position.coords.longitude);
+      //setCurrentLocation( (prev)=>{return {latitude:position.coords.latitude,longitude: position.coords.longitude}} );
+      setCurrentLocation({latitude:position.coords.latitude,longitude: position.coords.longitude})
+    }, function(error) {
+      console.error(error);
+    }, {
+      enableHighAccuracy: true
+    });
+  }
+}
 
 const Wrapper = styled.div`
   display: flex;

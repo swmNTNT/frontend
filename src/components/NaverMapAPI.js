@@ -53,9 +53,4 @@ function addMarker(lat, lng, isClicked, setCurrentMarker) {
     )
 }
 
-function clickMarkerHandler() {
-    alert("click!");
-
-}
-
 export default NaverMapAPI;
