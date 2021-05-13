@@ -1,5 +1,10 @@
-import React, { Component, useState } from 'react'
-import { RenderAfterNavermapsLoaded, NaverMap, Marker, loadNavermapsScript } from 'react-naver-maps'; // naver map 패키지 불러오기
+import React, { Component, useState, useEffect } from "react";
+import {
+  RenderAfterNavermapsLoaded,
+  NaverMap,
+  Marker,
+  loadNavermapsScript,
+} from "react-naver-maps"; // naver map 패키지 불러오기
 
 const navermaps = window.naver.maps;
 
@@ -18,34 +23,55 @@ const sample = [
   },
 ];
 
-function NaverMapAPI(props) {
-    const [currentMarker, setCurrentMarker] = useState();
-    const {currentLocation} = {...props};
+function NaverMapAPI() {
+  const [currentMarker, setCurrentMarker] = useState();
 
-    const isSameMarker = (marker1, marker2) => {
-        if (!marker1 || !marker2) return false;
-        return marker1.lat === marker2.lat &&
-            marker1.lng === marker2.lng;
-    }
+  const isSameMarker = (marker1, marker2) => {
+    if (!marker1 || !marker2) return false;
+    return marker1.lat === marker2.lat && marker1.lng === marker2.lng;
+  };
 
-    return (
-        <NaverMap
-            mapDivId={"maps-getting-started-uncontrolled"}
-            style={{ width: "100vw", height: "105vh" }}
-            center={
-                currentLocation ? {lat:currentLocation.lat, lng:currentLocation.lng}
-                : {lat:37.5666103, lng:126.9783882}
-            }
-            defaultZoom={15}
-            draggable={true}
-        >
+  useEffect(() => {
+    const cleanLogos = async () => {
+      let logo = document.querySelector(
+        "#react-naver-map > div:nth-child(2) > div:nth-child(2)"
+      );
+      if (logo) logo.remove();
+      logo = document.querySelector(
+        "#react-naver-map > div:nth-child(2) > div"
+      );
+      if (logo) logo.remove();
+      logo = document.querySelector("#react-naver-map > div:nth-child(3)");
+      if (logo) logo.remove();
+    };
+    cleanLogos();
+    const cl = setInterval(cleanLogos, 10);
+    const loopend = setTimeout(() => {
+      clearInterval(cl);
+    }, 3000);
+    return () => {
+      clearInterval(cl);
+      clearTimeout(loopend);
+    };
+  });
 
-            {sample.map((pos) => (
-                addMarker(pos.lat, pos.lng, isSameMarker(pos, currentMarker), setCurrentMarker)
-            ))}
-
-        </NaverMap>
-    );
+  return (
+    <NaverMap
+      mapDivId={"maps-getting-started-uncontrolled"}
+      style={{ width: "100vw", height: "100vh" }}
+      defaultCenter={{ lat: 37.554722, lng: 126.970833 }}
+      defaultZoom={14}
+    >
+      {sample.map((pos) =>
+        addMarker(
+          pos.lat,
+          pos.lng,
+          isSameMarker(pos, currentMarker),
+          setCurrentMarker
+        )
+      )}
+    </NaverMap>
+  );
 }
 
 function addMarker(lat, lng, isClicked, setCurrentMarker) {

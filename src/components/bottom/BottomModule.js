@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { BottomSheet } from "react-spring-bottom-sheet";
 
 import ViewModule from "./ViewModule";
 
-const Bottom = (props) => {
-  const {onMyLocationClicked} = {...props};
+const Bottom = () => {
+  const rootRef = useRef(null);
   const sheetRef = useRef();
   const [isBottom, setIsBottom] = useState(false);
 
@@ -24,8 +24,14 @@ const Bottom = (props) => {
   const handle_snapToTop = () =>
     sheetRef.current.snapTo(({ snapPoints }) => Math.max(...snapPoints));
 
+  useEffect(() => {
+    // console.log("sheetRef.current", sheetRef.current);
+    console.log("rootRef.current", rootRef.current);
+    return () => {};
+  }, []);
+
   return (
-    <>
+    <div className="bottomSheetRoot">
       <BottomSheet
         ref={sheetRef}
         open
@@ -38,6 +44,7 @@ const Bottom = (props) => {
         ]}
         blocking={false}
         onSpringStart={() => {
+          console.log(sheetRef.current);
           // console.log("Transition from:", sheetRef.current.height);
           requestAnimationFrame(() => {
             // console.log("Transition to:", sheetRef.current.height);
@@ -50,10 +57,10 @@ const Bottom = (props) => {
         }}
       >
         <>
-          <ViewModule isBottom={isBottom} onMyLocationClicked={onMyLocationClicked} />
+          <ViewModule ref={rootRef} isBottom={isBottom} />
         </>
       </BottomSheet>
-    </>
+    </div>
   );
 };
 
