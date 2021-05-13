@@ -4,12 +4,10 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 
 import ViewModule from "./ViewModule";
 
-const Bottom = () => {
+const Bottom = ({ stationsState, ...props }) => {
   const rootRef = useRef(null);
   const sheetRef = useRef();
   const [isBottom, setIsBottom] = useState(false);
-
-
 
   /* --- resize section ---  */
   // 가장 작게 축소
@@ -25,8 +23,6 @@ const Bottom = () => {
     sheetRef.current.snapTo(({ snapPoints }) => Math.max(...snapPoints));
 
   useEffect(() => {
-    // console.log("sheetRef.current", sheetRef.current);
-    console.log("rootRef.current", rootRef.current);
     return () => {};
   }, []);
 
@@ -57,7 +53,11 @@ const Bottom = () => {
         }}
       >
         <>
-          <ViewModule ref={rootRef} isBottom={isBottom} />
+          <ViewModule
+            ref={rootRef}
+            isBottom={isBottom}
+            stationsState={stationsState}
+          />
         </>
       </BottomSheet>
     </div>

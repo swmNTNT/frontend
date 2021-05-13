@@ -36,7 +36,7 @@ const useStationNearby = (minLat, maxLat, minLng, maxLng) => {
         if (res.status === 200) {
           setState((p) => ({
             ...p,
-            loading: true,
+            loading: false,
             error: false,
             stations: res.data.data,
           }));
@@ -49,7 +49,7 @@ const useStationNearby = (minLat, maxLat, minLng, maxLng) => {
     };
     fetchData();
     return () => {};
-  }, []);
+  }, [minLat, maxLat, minLng, maxLng]);
 
   return state;
 };

@@ -27,9 +27,10 @@ function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [currentLocation, setCurrentLocation] = useState();
 
-  //useStationNearby
-  const stationsState = useStationNearby();
-  console.log(stationsState);
+  //
+  const stationsState = useStationNearby(); // stationsState.stations
+  // console.log(stationsState);
+
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -102,7 +103,10 @@ function HomePage() {
       >
         <NaverMapAPI currentLocation={currentLocation} />
       </RenderAfterNavermapsLoaded>
-      <BottomModule onMyLocationClicked={getMyLocation} />
+      <BottomModule
+        onMyLocationClicked={getMyLocation}
+        stationsState={stationsState}
+      />
       <Drawer
         anchor="right"
         open={drawerOpened}

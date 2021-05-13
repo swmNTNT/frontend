@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
 // header
@@ -7,9 +7,9 @@ import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
 // list moudle
 
 const ViewModule = (props) => {
-  const { isBottom, onMyLocationClicked } = { ...props };
+  const { isBottom, onMyLocationClicked, stationsState } = { ...props };
 
-  const [viewState] = useState({
+  const [viewState, setViewState] = useState({
     header: {},
     title: {
       title_text: "주변에 4개의 충전소",
@@ -29,8 +29,25 @@ const ViewModule = (props) => {
       },
     ],
   });
-
-  // 현재 나의 위치가 바뀐 경우
+  console.log("stationsState", stationsState);
+  // 현재 나의 위치가 바뀐 경우  - effect update
+  useEffect(() => {
+    if (
+      !stationsState.error &&
+      !stationsState.loading &&
+      stationsState.stations
+    ) {
+      console.log("stationsState.stations", stationsState.stations);
+      const count_nearbyStation = stationsState.stations.length;
+      setViewState((prev) => ({
+        ...prev,
+        title: {
+          title_text: `주변에 ${count_nearbyStation}개의 충전소`,
+        },
+      }));
+    }
+    return () => {};
+  }, [stationsState]);
 
   // 주변에 충전소가 없는 경우
 
