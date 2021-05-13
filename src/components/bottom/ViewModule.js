@@ -7,8 +7,8 @@ import { ViewHeader, ViewList, ViewState, ViewTitle } from "./view";
 // list moudle
 
 const ViewModule = (props) => {
-  const {isBottom, onMyLocationClicked} = {...props};
-  
+  const { isBottom, onMyLocationClicked } = { ...props };
+
   const [viewState] = useState({
     header: {},
     title: {

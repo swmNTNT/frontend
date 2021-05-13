@@ -112,7 +112,8 @@ function HomePage() {
         loading={<p>Maps Loading...</p>}
       >
         <NaverMapAPI
-          isBottomSheetOpened
+          isBottomSheetOpened={isBottomSheetOpened}
+          currentLocation={currentLocation}
           onMarkerClicked={(id) => {}}
           onMapMoved={(bound) => {}}
         />
@@ -121,10 +122,13 @@ function HomePage() {
       {/* <div id="map" style={{ width: "100vw", height: "100vh" }} /> */}
 
       <BottomModule
-        onOpened={() => console.log("opened")}
-        onClosed={() => console.log("closed")}
-        // onOpened={() => setIsBottomSheetOpened(true)}
-        // onClosed={() => setIsBottomSheetOpened(false)}
+        onMyLocationClicked={getMyLocation}
+        onOpened={() => {
+          setIsBottomSheetOpened(true);
+        }}
+        onClosed={() => {
+          setIsBottomSheetOpened(false);
+        }}
       />
       <Drawer
         anchor="right"

@@ -3,11 +3,14 @@ import styled from "styled-components";
 import { BottomSheet } from "react-spring-bottom-sheet";
 
 import ViewModule from "./ViewModule";
+import useWindowSize from "../../hooks/useWindowSize";
 
-const Bottom = () => {
+const Bottom = (props) => {
+  const { onMyLocationClicked, onOpened, onClosed } = { ...props };
   const rootRef = useRef(null);
   const sheetRef = useRef();
   const [isBottom, setIsBottom] = useState(false);
+  const size = useWindowSize();
 
   /* --- resize section ---  */
   // 가장 작게 축소
@@ -24,7 +27,7 @@ const Bottom = () => {
 
   useEffect(() => {
     // console.log("sheetRef.current", sheetRef.current);
-    console.log("rootRef.current", rootRef.current);
+    // console.log("rootRef.current", rootRef.current);
     return () => {};
   }, []);
 
@@ -42,20 +45,23 @@ const Bottom = () => {
         ]}
         blocking={false}
         onSpringStart={() => {
-          console.log(sheetRef.current);
-          // console.log("Transition from:", sheetRef.current.height);
           requestAnimationFrame(() => {
-            // console.log("Transition to:", sheetRef.current.height);
-            if (sheetRef.current.height < 200) {
+            if (sheetRef.current.height < size.height / 3) {
               setIsBottom(true);
+              onClosed();
             } else {
               setIsBottom(false);
+              onOpened();
             }
           });
         }}
       >
         <>
-          <ViewModule ref={rootRef} isBottom={isBottom} />
+          <ViewModule
+            ref={rootRef}
+            isBottom={isBottom}
+            onMyLocationClicked={onMyLocationClicked}
+          />
         </>
       </BottomSheet>
     </div>
