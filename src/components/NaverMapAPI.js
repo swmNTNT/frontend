@@ -1,11 +1,11 @@
-import React, { Component, useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  RenderAfterNavermapsLoaded,
+  // RenderAfterNavermapsLoaded,
   NaverMap,
   Marker,
-  loadNavermapsScript,
+  // loadNavermapsScript,
 } from "react-naver-maps"; // naver map 패키지 불러오기
-import { withNavermaps } from "react-naver-maps/dist/hocs-018c38ad";
+// import { withNavermaps } from "react-naver-maps/dist/hocs-018c38ad";
 import useWindowSize from "../hooks/useWindowSize";
 
 const navermaps = window.naver.maps;

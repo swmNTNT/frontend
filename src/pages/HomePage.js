@@ -1,28 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BottomModule from "../components/bottom/BottomModule";
 import SearchBar from "../components/SearchBar";
-import {
-  RenderAfterNavermapsLoaded,
-  NaverMap,
-  Marker,
-  loadNavermapsScript,
-} from "react-naver-maps"; // naver map 패키지 불러오기
-import styled from "styled-components";
+import { RenderAfterNavermapsLoaded } from "react-naver-maps"; // naver map 패키지 불러오기
 
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/SearchRounded";
+import { Drawer } from "@material-ui/core";
+// import SearchIcon from "@material-ui/icons/SearchRounded";
 import NaverMapAPI from "../components/NaverMapAPI";
 import useStationNearby from "../hooks/useStationNearby";
-import { ViewState, ViewTitle } from "../components/bottom/view";
+import { ViewTitle } from "../components/bottom/view";
 import ViewNotification from "../components/bottom/view/ViewNotification";
 
-const navermaps = window.naver.maps;
+// const navermaps = window.naver.maps;
 
 function HomePage() {
   const [drawerOpened, setDrawerOpened] = useState(false);

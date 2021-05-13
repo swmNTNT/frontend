@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import EvStationIcon from '@material-ui/icons/EvStation';
+// import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import EvStationIcon from "@material-ui/icons/EvStation";
 
 const ViewNotificationItem = ({ subTitle, title, ...props }) => {
   return (
     <Wrapper {...props}>
       <div className="contentCol">
         <div className="iconAndInfo">
-            <div className="icon">
+          <div className="icon">
             <EvStationIcon htmlColor="#E2C707" />
-            </div>
-            <div className="baseInfo">
+          </div>
+          <div className="baseInfo">
             <div className="subTitle">{subTitle}</div>
             <div className="title">{title}</div>
-            </div>
+          </div>
         </div>
 
         <div className="bellIcon">
@@ -40,8 +40,8 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    .iconAndInfo{
-        display:flex;
+    .iconAndInfo {
+      display: flex;
     }
     .icon {
       margin-right: 16px;
