@@ -133,6 +133,12 @@ function NaverMapAPI(props) {
       defaultCenter={{ lat: 37.554722, lng: 126.970833 }}
       defaultZoom={14}
       logoControl={false}
+      onBoundChange={(bounds) => {
+        console.log(bounds);
+      }} // bounds: naver.maps.LatLngBounds
+      onMapClick={(event) => {
+        console.log(event);
+      }} // event: PointerEv
     >
       {stationsState.stations.map((s) => {
         const pos = {

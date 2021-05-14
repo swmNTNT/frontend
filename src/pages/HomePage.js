@@ -104,7 +104,9 @@ function HomePage() {
           isBottomSheetOpened={isBottomSheetOpened}
           currentLocation={currentLocation}
           onMarkerClicked={(id) => {}}
-          onMapMoved={(bound) => {}}
+          onMapMoved={(bound) => {
+            console.log("bound", bound);
+          }}
           stationsState={stationsState}
         />
       </RenderAfterNavermapsLoaded>
