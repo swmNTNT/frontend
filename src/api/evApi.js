@@ -15,6 +15,14 @@ export const postApi = {
       userLng,
     });
   },
+  stationInfo: (stationId) => {
+    return api.get(`/station/${stationId}`,)
+  },
+  addReservation: (email, stationId) => {
+    return api.post("/station/reserve", {
+      email, stationId
+    })
+  }
 };
 
 /*
@@ -31,9 +39,9 @@ export const postApi = {
  "addr": "서울특별시 노원구 노원로 330",
  "stId": "ME174018", // 충전소 아이디
  "stNm": "롯데마트 중계점",
- "chgerId": "01", // 충전기 아이디 
+ "chgerId": "01", // 충전기 아이디
  "chgerStat": "2", //  충전기상태
- "type": "06",  // 충전기 타입 
+ "type": "06",  // 충전기 타입
  "lat": "37.6466673",
  "lng": "127.0715514",
  "time": "20210513211044",
