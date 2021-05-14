@@ -10,24 +10,6 @@ import useWindowSize from "../hooks/useWindowSize";
 
 const navermaps = window.naver.maps;
 
-const sample = [
-  {
-    id: 1,
-    lat: 37.554722,
-    lng: 126.970833,
-  },
-  {
-    id: 2,
-    lat: 37.353722,
-    lng: 126.920833,
-  },
-  {
-    id: 3,
-    lat: 37.553722,
-    lng: 126.922833,
-  },
-];
-
 function NaverMapAPI(props) {
   const {
     currentLocation,
