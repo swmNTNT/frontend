@@ -99,7 +99,8 @@ function NaverMapAPI(props) {
           );
           setCurrentMarker(marker);
           // mapRef.panBy({ x: 0, y: 200 });
-          onMarkerClicked(marker.id);
+          console.log("marker", marker);
+          onMarkerClicked(marker);
         }}
       />
     );
@@ -122,17 +123,19 @@ function NaverMapAPI(props) {
         console.log(event);
       }} // event: PointerEv
     >
-      {stationsState.stations.map((s) => {
-        const pos = {
-          lat: Number(s.lat),
-          lng: Number(s.lng),
-        };
-        return addMarker(
-          pos,
-          isSameMarker(pos, currentMarker),
-          setCurrentMarker
-        );
-      })
+      {stationsState.stations
+        .map((s) => {
+          const pos = {
+            lat: Number(s.lat),
+            lng: Number(s.lng),
+          };
+          return addMarker(
+            pos,
+            isSameMarker(pos, currentMarker),
+            setCurrentMarker
+          );
+        })
+        .slice(0, 200)
       // {
       //   id: 1,
       //   lat: 37.554722,

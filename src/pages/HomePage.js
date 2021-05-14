@@ -19,13 +19,12 @@ function HomePage() {
     lng: null,
   });
   const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(true);
-  console.log("currentLocation update", currentLocation);
+  // console.log("currentLocation update", currentLocation);
   //
-  const stationsState = useStationNearby(
-    currentLocation.lat,
-    currentLocation.lng
-  ); // stationsState.stations
-  console.log(stationsState);
+
+  const [stationNearby, setStationNearby] = useState({ lat: null, lng: null });
+  const stationsState = useStationNearby(stationNearby.lat, stationNearby.lng); // stationsState.stations
+  // console.log(stationsState);
 
   const [viewState] = useState({
     header: {},
@@ -103,9 +102,25 @@ function HomePage() {
         <NaverMapAPI
           isBottomSheetOpened={isBottomSheetOpened}
           currentLocation={currentLocation}
-          onMarkerClicked={(id) => {}}
+          onMarkerClicked={({ id }) => {
+            console.log("id", id);
+          }}
           onMapMoved={(bound) => {
-            console.log("bound", bound);
+            // console.log("bound", bound);
+            setStationNearby({
+              lat:
+                (bound._max._lat +
+                  bound._min._lat +
+                  bound._ne._lat +
+                  bound._sw._lat) /
+                4,
+              lng:
+                (bound._max._lng +
+                  bound._min._lng +
+                  bound._ne._lng +
+                  bound._sw._lng) /
+                4,
+            });
           }}
           stationsState={stationsState}
         />
